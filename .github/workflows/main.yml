@@ -28,13 +28,13 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test with dotnet
-      run: dotnet test --logger trx --results-directory "TestResults"
-    - name: Upload dotnet test results
+      run: dotnet test --logger trx 
+    - name: Upload dotnet build
       uses: actions/upload-artifact@v3
       with:
-            name: dotnet-results-${{ matrix.dotnet-version }}
-            path: Booking.Server/TestResults
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3.0.0
-      with:
-        name:  dotnet-results-${{ matrix.dotnet-version }}
+            name: dotnet-build-${{ matrix.dotnet-version }}
+            path: |
+                  **/*
+                  !.git/**/*
+                  !.github/**/*
+     
