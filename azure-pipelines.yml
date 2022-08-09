@@ -1,0 +1,42 @@
+trigger:
+- main
+
+pool: Default
+
+
+  
+steps:
+- script: 
+  workingDirectory: Booking.Server/
+  displayName: Set working directory
+
+- task: UseDotNet@2
+  inputs:
+    version: '6.0.x'
+    includePreviewVersions: true 
+
+
+
+- task: DotNetCoreCLI@2
+  displayName: .NET restore
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: .NET build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'Booking.Server'
+
+# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: Booking.Server 
+    artifactName: 'Booking-api'
