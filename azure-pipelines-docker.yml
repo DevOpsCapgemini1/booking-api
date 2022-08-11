@@ -17,6 +17,9 @@ stages:
   - job: Build
     displayName: Build and push Docker image
     steps:
+    - script: 
+      workingDirectory: Booking.Server/
+      displayName: Set working directory
     - task: Docker@1
       displayName: 'Build the Docker image'
       inputs:
