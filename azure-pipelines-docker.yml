@@ -7,36 +7,15 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
  
-variables:
-  ImageName: 'mbidzinsk/booking-api-azure:$(Build.BuildId)'
+
  
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:  
-  - job: Build
-    displayName: Build and push Docker image
-    steps:
-    - script: 
-      workingDirectory: Booking.Server/
-      displayName: Set working directory
-    - task: Docker@1
-      displayName: 'Build the Docker image'
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Docker Hub'
-        command: 'Build an image'
-        dockerFile: '**/Dockerfile'
-        imageName: '$(ImageName)'
-        includeLatestTag: true
-        useDefaultContext: false
-        buildContext: '.'
-     
-    - task: Docker@1
-      displayName: 'Push the Docker image to Dockerhub'
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Docker Hub'
-        command: 'Push an image'
-        imageName: '$(ImageName)'
-      condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
+steps:
+    
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker Hub'
+    repository: 'mbidzinsk/booking-api-azure'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    buildContext: 'Booking.Server'
