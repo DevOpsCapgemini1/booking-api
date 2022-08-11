@@ -17,13 +17,16 @@ stages:
   - job: Build
     displayName: Build and push Docker image
     steps:
+    - script: 
+      workingDirectory: Booking.Server/
+      displayName: Set working directory
     - task: Docker@1
       displayName: 'Build the Docker image'
       inputs:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'Docker Hub'
         command: 'Build an image'
-        dockerFile: '**/Dockerfile'
+        dockerFile: 'Dockerfile'
         imageName: '$(ImageName)'
         includeLatestTag: true
         useDefaultContext: false
