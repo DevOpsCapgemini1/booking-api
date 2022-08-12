@@ -35,6 +35,11 @@ steps:
     command: 'build'
     projects: 'Booking.Server'
 
+- script: dotnet test Booking.Server/ --logger trx
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/*.trx'
+
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishPipelineArtifact@1
   inputs:
