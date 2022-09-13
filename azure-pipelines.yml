@@ -38,7 +38,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: 'Booking.Server.API/Booking.Server.API.csproj'
+    projects: Booking.Server/Booking.Server.API/Booking.Server.API.csproj
     arguments: '-o _output'
     zipAfterPublish: false
     modifyOutputPath: false
