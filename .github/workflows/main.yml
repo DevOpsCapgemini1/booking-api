@@ -29,11 +29,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test with dotnet
       run: dotnet test --logger trx --results-directory "TestResult-${{ matrix.dotnet-version }}"
-    - name: Upload dotnet build with dll
+    - name: Dotnet publish
+      run: dotnet publish -o _output Booking.Server/Booking.Server.API/Booking.Server.API.csproj
+    - name: Upload dotnet  with dll 
       uses: actions/upload-artifact@v3
       with:
             name: dotnet-build-${{ matrix.dotnet-version }}
-            path: Booking.Server/**/*.dll
+            path: _output
     - name: Upload  test results
       uses: actions/upload-artifact@v3
       with:
