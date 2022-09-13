@@ -23,27 +23,27 @@ steps:
   displayName: .NET restore
   inputs:
     command: restore
-    projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: .NET build
   inputs:
     command: build
-    projects: '**/*.csproj'
-
-
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'build'
-    projects: 'Booking.Server'
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'Booking.Server.API/Booking.Server.API.csproj'
+    arguments: '-o _output'
+    zipAfterPublish: false
+    modifyOutputPath: false
 
-- script: dotnet test Booking.Server/ --logger trx
+- script: dotnet test --logger trx --results-directory "TestResult"
 - task: PublishTestResults@2
   inputs:
-    testResultsFiles: '**/*.trx'
+    testResultsFiles: Booking.Server/TestResult
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: Booking.Server 
+    targetPath: Booking.Server/_output
     artifactName: 'Booking-api'
