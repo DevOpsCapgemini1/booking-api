@@ -51,5 +51,5 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: Booking.Server/_output
+    targetPath: _output
     artifactName: 'Booking-api'
