@@ -46,7 +46,7 @@ steps:
 - script: dotnet test Booking.Server/ --logger trx
 - task: PublishTestResults@2
   inputs:
-    testResultsFormat: 'JUnit'
+    testResultsFormat: 'VSTest'
     testResultsFiles: 'Booking.Server/Booking.Server.Test/TestResults/*.trx'
 
 
