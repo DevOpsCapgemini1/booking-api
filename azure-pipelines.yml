@@ -43,10 +43,10 @@ steps:
     zipAfterPublish: false
     modifyOutputPath: false
 
-- script: dotnet test --logger trx --results-directory "TestResult"
+- script: dotnet test Booking.Server/ --logger trx
 - task: PublishTestResults@2
   inputs:
-    testResultsFiles: Booking.Server/TestResult
+    testResultsFiles: '**/*.trx'
 
 
 - task: PublishPipelineArtifact@1
