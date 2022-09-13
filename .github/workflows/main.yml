@@ -30,7 +30,7 @@ jobs:
     - name: Test with dotnet
       run: dotnet test --logger trx --results-directory "TestResult-${{ matrix.dotnet-version }}"
     - name: Dotnet publish
-      run: echo pwd
+      run: pwd
     - name: Upload dotnet  with dll 
       uses: actions/upload-artifact@v3
       with:
