@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
             name: dotnet-build-${{ matrix.dotnet-version }}
-            path: /Booking.Server/_output/
+            path: Booking.Server/_output
     - name: Upload  test results
       uses: actions/upload-artifact@v3
       with:
