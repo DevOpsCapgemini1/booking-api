@@ -44,10 +44,9 @@ steps:
     modifyOutputPath: false
 
 - script: dotnet test Booking.Server/ --logger trx
-- task: PublishPipelineArtifact@1
+- task: PublishTestResults@2
   inputs:
-    targetPath: 'Booking.Server/Booking.Server.Test/TestResults/*.trx'
-    artifactName: 'test-results'
+    testResultsFiles: 'Booking.Server/Booking.Server.Test/TestResults/*.trx'
 
 
 - task: PublishPipelineArtifact@1
